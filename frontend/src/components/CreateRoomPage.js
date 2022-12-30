@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 export default function CreateRoomPage(props) {
+
     const navigate = useNavigate();
 
     const[defaultVotes, setDefaultVotes] = useState(1);
@@ -31,7 +32,7 @@ export default function CreateRoomPage(props) {
         fetch("/api/create-room", requestOptions)
         .then((response) => response.json())
         .then((data) => navigate('/room/' + data.code));
-    }
+    };
 
     return (
         <Grid container spacing={1}>

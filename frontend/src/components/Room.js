@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Grid, Button, Typography } from  "@mui/material";
 
 export default function Room(props) {
 
@@ -17,13 +18,52 @@ export default function Room(props) {
         setIsHost(data.is_host); 
     });
 
-    return (
-        <div>
-            <h3>{roomCode}</h3>
-            <p>Votes: {votesToSkip}</p>
-            <p>Guest Can Pause: {guestCanPause.toString()}</p>
-            <p>Host: {isHost.toString()}</p>
-        </div>
-    );
+    const getRoomDetails = () => {
+        return (
+            fetch("/api/get-room?" + "code=" + this.roomCode)
+            .then((response) => {
+                if (!response.ok){
+                    pass
+                }
+            })
+        );
+    };
 
+    const leaveButtonPressed = () => {
+
+    };
+
+    return (
+        <Grid container spacing={1}>
+            <Grid item xs={12} align="center">
+                <Typography variant="h4" component="h4">
+                    Code: {roomCode}
+                </Typography>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <Typography variant="h6" component="h6">
+                    Votes: {votesToSkip}
+                </Typography>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <Typography variant="h6" component="h6">
+                    Guest Can Pause: {guestCanPause.toString()}
+                </Typography>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <Typography variant="h6" component="h6">
+                    Host: {isHost.toString()}
+                </Typography>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={this.leaveButtonPressed}
+                >
+                    Leave Room
+                </Button>
+            </Grid>
+        </Grid>
+    );
 }
